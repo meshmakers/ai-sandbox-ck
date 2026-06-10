@@ -13,6 +13,7 @@ One-time per developer. Estimated time: ~1 hour.
   ```bash
   export SSH_AUTH_SOCK='/var/folders/.../keeper-ssh-agent.sock'
   ```
+- For `local-dev` target (M0 primary): the OctoMesh services must be running locally. Start them via `Start-Octo` from `octo-tools` (PowerShell). This starts IdentityServices (`:5002`/`:5003`), McpServices (`:5016`/`:5017`), AssetRepositoryServices, BotServices, CommunicationControllerServices and friends as native processes; backing services (MongoDB, CrateDB, RabbitMQ) come from a kind-on-Docker-Desktop cluster running in parallel.
 
 ## Steps
 
@@ -27,9 +28,17 @@ One-time per developer. Estimated time: ~1 hour.
    dotnet build -c DebugL    # must exit 0
    ```
 
-3. Generate `.mcp.json` for your target cluster
+3. (For `local-dev` target only) Start the Octo services locally
+   ```powershell
+   # In a PowerShell session:
+   cd /Users/gerald/RiderProjects/meshmakers/octo-tools
+   ./Start-Octo.ps1
+   ```
+   Leave that terminal open; the services run there. McpServices at `https://localhost:5017`, IdentityServices at `https://localhost:5003`.
+
+4. Generate `.mcp.json` for your target
    ```bash
-   # Default (local-kind):
+   # Default (local-dev):
    ./scripts/init.sh
 
    # Or pick a remote cluster:
@@ -40,7 +49,7 @@ One-time per developer. Estimated time: ~1 hour.
 
    Windows-native developers run `./scripts/init.ps1` instead (needs `Install-Module powershell-yaml -Scope CurrentUser`).
 
-4. Authenticate against MCP
+5. Authenticate against MCP
    ```bash
    claude
    # Inside the session, type:
@@ -51,11 +60,11 @@ One-time per developer. Estimated time: ~1 hour.
    # Should return at least the Sandbox/Asset type
    ```
 
-5. First test run
+6. First test run
    ```bash
    claude
    > List all CK types and attributes in the sandbox.
    # Agent should respond with the contents of Sandbox-1.0.0
    ```
 
-If step 5 returns the schema, you are ready for the M0 walking-skeleton run.
+If step 6 returns the schema, you are ready for the M0 walking-skeleton run.

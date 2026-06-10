@@ -1,15 +1,23 @@
 # Cluster catalogue for ai-sandbox-ck.
-# Each entry maps a cluster slug to its MCP endpoint + IdP for the m0-walking-skeleton client.
-# scripts/init.sh / scripts/init.ps1 reads this file and writes .mcp.json for the chosen cluster.
+# Each entry maps a "target" slug to its MCP endpoint + IdP for the m0-walking-skeleton client.
+# scripts/init.sh / scripts/init.ps1 reads this file and writes .mcp.json for the chosen target.
 #
-# Default cluster: local-kind (per M0 user direction — local first-pass validation).
-defaultCluster: local-kind
+# Default target: local-dev (per M0 user direction — local first-pass validation).
+#
+# Note on "local-dev" vs "local-kind":
+#   local-dev = OctoMesh services running native on the developer machine via Start-Octo
+#               (octo-tools/Start-Octo.ps1). McpServices at localhost:5016/:5017,
+#               IdentityServices at localhost:5002/:5003. Backing services (MongoDB,
+#               CrateDB, RabbitMQ) come from a kind-on-Docker-Desktop cluster.
+#   local-kind = reserved for M1+ — kind is the host for AiWorker pod Helm-chart tests
+#               (not for the Octo services themselves).
+defaultCluster: local-dev
 
 clusters:
-  - slug: local-kind
-    description: "Local kind-on-Docker-Desktop OctoMesh stack (M0 primary)"
-    mcpUrl: "http://host.docker.internal:5180/ai-sandbox/mcp"   # VERIFY: actual kind ingress port
-    idpIssuer: "http://host.docker.internal:5101"                # VERIFY: kind Identity Server port
+  - slug: local-dev
+    description: "Local Mac/Linux native Octo services via Start-Octo; kind hosts backing services only (M0 primary)"
+    mcpUrl: "https://localhost:5017/ai-sandbox/mcp"    # McpServices --urls=https://*:5017;http://*:5016
+    idpIssuer: "https://localhost:5003"                # IdentityServices --urls=https://*:5003;http://*:5002
     idpClientId: "m0-walking-skeleton"
 
   - slug: staging-1

@@ -35,8 +35,15 @@ dotnet build -c DebugL
 
 ## Cluster targets
 
-Listed in `cluster-config.yaml`. M0 primary target is `local-kind`; `staging-1`
-is set up in parallel for M1. `test-2` is optional.
+Listed in `cluster-config.yaml`. M0 primary target is **`local-dev`** —
+OctoMesh services run native on your machine via the `Start-Octo` PowerShell
+script in `octo-tools`. McpServices at `https://localhost:5017`,
+IdentityServices at `https://localhost:5003`. A kind-on-Docker-Desktop cluster
+runs in parallel just for backing services (MongoDB, CrateDB, RabbitMQ).
+
+`staging-1` is set up in parallel for M1 (Pod-runtime needs a real K8s cluster).
+`test-2` is optional. The `local-kind` slug is reserved for M1+ Helm-chart
+tests against the AiWorker pod.
 
 ## Agent setup
 
