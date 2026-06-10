@@ -25,10 +25,15 @@ disposable. **Never push to `main` directly.** Always open a PR for review.
    - `GlobalUsings.cs` includes the generated System namespace
    - `Directory.Build.props` `RestoreSources` order: local first for DebugL
 3. Run `dotnet build -c DebugL` — must exit 0 with no warnings.
-4. Run `./scripts/preview.sh` to regenerate the Mermaid class diagram.
+4. Run `./scripts/preview.sh` to regenerate the docs. Output lands in
+   `preview/Sandbox/` as four Docusaurus-style markdown files:
+   `index.md` (overview + Mermaid `classDiagram`), `Types.md`
+   (per-type tables), `Attributes.md`, `VersionHistory.md`.
 5. Open a PR via `gh pr create` with `--title` + `--body`. The `--body`
-   MUST include the generated Mermaid block from `preview/model.md` so the
-   reviewer sees the diagram in the PR preview.
+   MUST include the **Mermaid block extracted from `preview/Sandbox/index.md`**
+   (the `\`\`\`mermaid` … `\`\`\`` fence) so the reviewer sees the diagram in
+   the PR preview. Do NOT paste the whole file (cross-links resolve to
+   `/Sandbox/Types#asset` which only works on a Docusaurus site, not in PR).
 
 ## YAML conventions in this repo
 

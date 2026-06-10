@@ -21,5 +21,6 @@ dotnet run --project "${COMPILER_PATH}" -- \
     -l "/" \
     > "${OUT_DIR}/build.log" 2>&1
 
-echo "Preview ready: ${OUT_DIR}/"
-echo "Open ${OUT_DIR}/model.md in VS Code → Open Preview to the Side"
+echo "Preview ready under ${OUT_DIR}/Sandbox/"
+echo "Open ${OUT_DIR}/Sandbox/index.md in VS Code → 'Open Preview to the Side' renders the Mermaid classDiagram"
+echo "(Types.md / Attributes.md / VersionHistory.md are the detail tables)"
