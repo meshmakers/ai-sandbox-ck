@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: MaintenanceTicket
+    description: A maintenance ticket raised against an Asset; tracks a short title and severity classification.
+    derivedFromCkTypeId: ${System}/Entity
+    attributes:
+      - id: ${this}/Title
+        name: Title
+      - id: ${this}/Severity
+        name: Severity
+    associations:
+      - id: ${this}/AffectsAsset
+        targetCkTypeId: ${this}/Asset
