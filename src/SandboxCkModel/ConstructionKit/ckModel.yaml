@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
+modelId: Sandbox-1.0.0
+description: M0 walking-skeleton sandbox CK model — minimal types for agent-driven CK editing experiments
+dependencies:
+  - System-[2.0,3.0)

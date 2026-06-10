@@ -1,0 +1,24 @@
+<Project>
+    <PropertyGroup>
+        <OctoRootDirectoryPropsFilePath>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))</OctoRootDirectoryPropsFilePath>
+        <OctoUserPropsFilePath>$([MSBuild]::GetPathOfFileAbove('Octo.User.props', '$(MSBuildThisFileDirectory)'))</OctoUserPropsFilePath>
+        <OctoRepoRootPath>$(MSBuildThisFileDirectory)</OctoRepoRootPath>
+        <OctoRepoRootPath Condition="'$(OctoRootDirectoryPropsFilePath)'!=''">$([System.IO.Path]::GetDirectoryName($(OctoRootDirectoryPropsFilePath)))</OctoRepoRootPath>
+    </PropertyGroup>
+    <Import Condition="'$(OctoRootDirectoryPropsFilePath)'=='' And Exists($(OctoUserPropsFilePath))" Project="$(OctoUserPropsFilePath)"/>
+    <Import Condition="Exists($(OctoRootDirectoryPropsFilePath))" Project="$(OctoRootDirectoryPropsFilePath)"/>
+    <PropertyGroup>
+        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <ImplicitUsings>true</ImplicitUsings>
+        <TargetFramework>net10.0</TargetFramework>
+        <OctoVersion Condition="'$(Configuration)'=='DebugL'">999.0.0</OctoVersion>
+        <OctoVersion Condition="'$(OctoNugetPrivateServer)'!='' And '$(OctoVersion)'==''">0.1.*</OctoVersion>
+        <OctoVersion Condition="'$(OctoNugetPrivateServer)'=='' And '$(OctoVersion)'==''">3.3.*</OctoVersion>
+        <RestoreSources Condition="'$(RestoreSources)'==''">https://api.nuget.org/v3/index.json</RestoreSources>
+        <RestoreSources Condition="'$(OctoNugetPrivateServer)'!=''">$(OctoNugetPrivateServer)</RestoreSources>
+        <!-- Gotcha #5: local source MUST be first for DebugL -->
+        <RestoreSources Condition="'$(Configuration)'=='DebugL'">$(OctoRepoRootPath)../nuget;$(RestoreSources)</RestoreSources>
+    </PropertyGroup>
+</Project>

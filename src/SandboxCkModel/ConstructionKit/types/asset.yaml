@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: Asset
+    description: A baseline asset entity; serves as the association target for M0 walking-skeleton experiments.
+    derivedFromCkTypeId: ${System}/Entity
+    attributes:
+      - id: ${this}/Name
+        name: Name
+      - id: ${this}/Location
+        name: Location
+        isOptional: true

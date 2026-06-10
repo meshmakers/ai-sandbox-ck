@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <OctoCompileCkModel>true</OctoCompileCkModel>
+        <OctoGenerateCkModelServiceClass>true</OctoGenerateCkModelServiceClass>
+        <!-- We do NOT publish this sandbox CK model anywhere -->
+        <OctoPublishCkModel>false</OctoPublishCkModel>
+        <IsPackable>false</IsPackable>
+        <Configurations>Debug;Release;DebugL</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Runtime contracts -->
+        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="$(OctoVersion)" />
+        <!-- Source generator: must be wired as Analyzer (not just PrivateAssets) so it runs at compile time -->
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="$(OctoVersion)" />
+        <!-- MsBuildTasks package drives the CK YAML -> intermediate compilation; without it the source generator has nothing to feed on -->
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="$(OctoVersion)" PrivateAssets="all" />
+        <!-- Gotcha #3: pin BOTH so the transitive chain pulls in Models.System -->
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.Models.System.Bot" Version="$(OctoVersion)" />
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.Models.System.Communication" Version="$(OctoVersion)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- ConstructionKitFolder is what MsBuildTasks/SourceGeneration look for; a plain <Folder> entry is NOT enough -->
+        <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
+    </ItemGroup>
+</Project>

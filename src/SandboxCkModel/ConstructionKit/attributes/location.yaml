@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Location
+    description: Free-text location hint of the asset (no geo-coordinate semantics; production work uses System types).
+    valueType: String

@@ -1,0 +1,25 @@
+# Cluster catalogue for ai-sandbox-ck.
+# Each entry maps a cluster slug to its MCP endpoint + IdP for the m0-walking-skeleton client.
+# scripts/init.sh / scripts/init.ps1 reads this file and writes .mcp.json for the chosen cluster.
+#
+# Default cluster: local-kind (per M0 user direction — local first-pass validation).
+defaultCluster: local-kind
+
+clusters:
+  - slug: local-kind
+    description: "Local kind-on-Docker-Desktop OctoMesh stack (M0 primary)"
+    mcpUrl: "http://host.docker.internal:5180/ai-sandbox/mcp"   # VERIFY: actual kind ingress port
+    idpIssuer: "http://host.docker.internal:5101"                # VERIFY: kind Identity Server port
+    idpClientId: "m0-walking-skeleton"
+
+  - slug: staging-1
+    description: "Azure AKS staging-1 (M1 prep)"
+    mcpUrl: "https://mcp.staging.octo-mesh.com/ai-sandbox/mcp"   # VERIFY: actual staging MCP route
+    idpIssuer: "https://identity.staging.octo-mesh.com"
+    idpClientId: "m0-walking-skeleton"
+
+  - slug: test-2
+    description: "Proxmox k3s test-2 (optional, secondary target)"
+    mcpUrl: "https://mcp.test-2.octo-mesh.com/ai-sandbox/mcp"    # VERIFY: actual test-2 MCP route
+    idpIssuer: "https://identity.test-2.octo-mesh.com"
+    idpClientId: "m0-walking-skeleton"

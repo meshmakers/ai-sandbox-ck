@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Name
+    description: Human-readable name of the asset.
+    valueType: String

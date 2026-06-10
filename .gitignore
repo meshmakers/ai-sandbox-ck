@@ -1,0 +1,12 @@
+bin/
+obj/
+preview/
+*.user
+.vs/
+.idea/
+*.suo
+*.userprefs
+
+# Local secrets / per-developer config
+.mcp.json
+*.local.json
