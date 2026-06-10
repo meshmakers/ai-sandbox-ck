@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Title
+    description: Short human-readable summary of the maintenance ticket.
+    valueType: String

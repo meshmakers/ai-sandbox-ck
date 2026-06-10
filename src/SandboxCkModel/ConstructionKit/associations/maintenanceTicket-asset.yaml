@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+  - id: AffectsAsset
+    description: Links a MaintenanceTicket to the Asset it affects. One ticket targets exactly one asset; an asset may have many tickets.
+    inboundName: MaintenanceTickets
+    inboundMultiplicity: N
+    outboundName: AffectedAsset
+    outboundMultiplicity: One

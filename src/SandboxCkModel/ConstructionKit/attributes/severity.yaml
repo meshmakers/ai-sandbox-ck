@@ -1,0 +1,6 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Severity
+    description: Severity classification of the maintenance ticket (Low, Medium, High).
+    valueType: Enum
+    valueCkEnumId: ${this}/Severity
