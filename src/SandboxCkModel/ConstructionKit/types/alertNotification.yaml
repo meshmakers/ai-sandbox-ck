@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: AlertNotification
+    description: An alert notification surfaced to operators; carries a short title and a numeric priority.
+    derivedFromCkTypeId: ${System}/Entity
+    attributes:
+      - id: ${this}/Title
+        name: Title
+      - id: ${this}/Priority
+        name: Priority
