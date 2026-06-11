@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: ServiceCall
+    description: A service call record; captures a short name and its duration.
+    derivedFromCkTypeId: ${System}/Entity
+    attributes:
+      - id: ${this}/Name
+        name: Name
+      - id: ${this}/Duration
+        name: Duration

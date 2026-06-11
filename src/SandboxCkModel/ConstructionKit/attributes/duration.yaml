@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Duration
+    description: Duration of the service call, expressed as a whole number.
+    valueType: Int
