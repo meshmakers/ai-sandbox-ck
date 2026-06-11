@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: SmokeTest
+    description: A minimal probe entity for smoke-testing agent-driven CK edits; carries a name and a severity classification.
+    derivedFromCkTypeId: ${System}/Entity
+    attributes:
+      - id: ${this}/Name
+        name: Name
+      - id: ${this}/Severity
+        name: Severity
